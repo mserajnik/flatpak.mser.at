@@ -1,0 +1,62 @@
+# flatpak.mser.at
+# Copyright (C) 2023-present  Michael Serajnik  https://github.com/mserajnik
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+app-id: com.gitlab.martintornqvist.InfraArcana
+runtime: org.freedesktop.Platform
+runtime-version: '23.08'
+sdk: org.freedesktop.Sdk
+command: infra-arcana
+
+finish-args:
+- --device=all
+- --share=ipc
+- --socket=fallback-x11
+- --socket=pulseaudio
+- --socket=wayland
+
+modules:
+  - name: infra-arcana
+    buildsystem: cmake
+    build-commands:
+      # Install the game executable and assets
+      - install -Dm755 ./ia -t /app/lib/infra-arcana
+      - cp -r ./audio /app/lib/infra-arcana/
+      - cp -r ./data /app/lib/infra-arcana/
+      - cp -r ./gfx /app/lib/infra-arcana/
+      # Install the required wrapper script (we need to change into the
+      # the executable's directory since it uses relative paths to look for
+      # the assets)
+      - install -Dm755 infra-arcana -t /app/bin
+      # Install the desktop file, the icon and the AppData file
+      - install -Dm644 ${FLATPAK_ID}.desktop -t /app/share/applications
+      - install -Dm644 ${FLATPAK_ID}.png -t /app/share/icons/hicolor/128x128/apps
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo
+    sources:
+      - type: git
+        url: https://gitlab.com/martin-tornqvist/ia.git
+        tag: v22.1.0
+        commit: 017836030830ca0bf0ac692044c17a4f63ae27a7
+      - type: script
+        dest-filename: infra-arcana
+        commands:
+          - cd /app/lib/infra-arcana
+          - exec ./ia "$@"
+      - type: file
+        path: com.gitlab.martintornqvist.InfraArcana.desktop
+      - type: file
+        path: com.gitlab.martintornqvist.InfraArcana.png
+      - type: file
+        path: com.gitlab.martintornqvist.InfraArcana.metainfo.xml

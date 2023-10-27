@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Sil-Q (GCU)
+GenericName=Roguelike
+Comment=A computer role-playing game with a strong emphasis on discovery and tactical combat
+Icon=com.github.silquirk.SilQ
+Exec=sil-q -mgcu
+Terminal=true
+Categories=Game;

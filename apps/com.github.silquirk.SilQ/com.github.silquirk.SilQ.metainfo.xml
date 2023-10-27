@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.github.silquirk.SilQ</id>
+  <developer_name>sil-quirk</developer_name>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-2.0+</project_license>
+  <name>Sil-Q</name>
+  <summary>Sil-Q is a computer role-playing game with a strong emphasis on discovery and tactical combat</summary>
+  <description>
+    <p>Sil-Q is a computer role-playing game with a strong emphasis on discovery and tactical combat. It has a simple but rich combat system which allows for a great variety of choice.</p>
+    <p>Sil-Q continues the development of Sil which hasn't been updated for a while.</p>
+  </description>
+  <launchable type="desktop-id">com.github.silquirk.SilQ.desktop</launchable>
+  <url type="homepage">https://github.com/sil-quirk/sil-q</url>
+  <url type="bugtracker">https://github.com/sil-quirk/sil-q/issues</url>
+  <releases>
+    <release version="1.5.0" date="2022-01-03"></release>
+  </releases>
+</component>

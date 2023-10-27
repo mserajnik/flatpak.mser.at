@@ -1,0 +1,93 @@
+name: Build and deploy
+
+on:
+  # Rebuild once a week
+  schedule:
+    - cron: '0 0 * * 1'
+  push:
+    branches:
+      - 'master'
+  pull_request:
+    branches:
+      - 'master'
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build applications and repository
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/andyholmes/flatter/freedesktop:23.08
+      options: --privileged
+
+    strategy:
+      matrix:
+        arch: [x86_64, aarch64]
+      fail-fast: false
+      # Only one job at a time can use the shared repository cache
+      max-parallel: 1
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Set up GPG
+        id: gpg
+        uses: crazy-max/ghaction-import-gpg@v6
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.GPG_PASSPHRASE }}
+
+      - name: Set up QEMU
+        if: ${{ matrix.arch == 'aarch64' }}
+        id: qemu
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: arm64
+
+      - name: Generate index.html file
+        uses: jaywcjlove/markdown-to-html-cli@main
+        with:
+          source: README.md
+          output: index.html
+          description: Various things missing from Flathub
+          favicon: data:image/png;base64,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
+          github-corners: https://github.com/mserajnik/flatpak.mser.at
+
+      - name: Generate CNAME file
+        run: |
+          echo "flatpak.mser.at" > CNAME
+
+      - name: Build applications
+        uses: andyholmes/flatter@main
+        with:
+          files: |
+            apps/com.github.silquirk.SilQ/com.github.silquirk.SilQ.yaml
+            apps/com.github.tmewett.BrogueCE/com.github.tmewett.BrogueCE.json
+            apps/com.gitlab.martintornqvist.InfraArcana/com.gitlab.martintornqvist.InfraArcana.yaml
+          arch: ${{ matrix.arch }}
+          gpg-sign: ${{ steps.gpg.outputs.fingerprint }}
+          upload-bundles: true
+          upload-pages-artifact: ${{ matrix.arch == 'aarch64' }}
+          upload-pages-includes: |
+            index.html
+            CNAME
+
+  deploy:
+    name: Deploy repository
+    if: ${{ github.event_name != 'pull_request' }}
+    runs-on: ubuntu-latest
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2

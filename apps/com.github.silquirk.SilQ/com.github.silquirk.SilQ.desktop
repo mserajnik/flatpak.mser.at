@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Sil-Q (X11)
+GenericName=Roguelike
+Comment=A computer role-playing game with a strong emphasis on discovery and tactical combat
+Icon=com.github.silquirk.SilQ
+Exec=sil-q -mx11
+Categories=Game;

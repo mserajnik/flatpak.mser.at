@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.gitlab.martintornqvist.InfraArcana</id>
+  <developer_name>Martin Törnqvist</developer_name>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>AGPL-3.0+</project_license>
+  <name>Infra Arcana</name>
+  <summary>Infra Arcana is a Roguelike set in the early 20th century</summary>
+  <description>
+    <p>Infra Arcana is a Roguelike set in the early 20th century. The goal is to explore the lair of a dreaded cult called The Church of Starry Wisdom. Buried deep beneath their hallowed grounds lies an artifact called The Shining Trapezohedron - a window to all secrets of the universe. Your ultimate goal is to unearth this artifact.</p>
+    <p>The theme and inspiration for this game comes mainly from the horror fiction writer H.P. Lovecraft. There is a Lore section on this site that describes some of his mythology. The game also draws flavor from various B-horror movies, as well as the first-person shooter PC game Blood.</p>
+    <p>Infra Arcana adheres to the virtues of the Roguelike genre - high replay value and challenging tactical gameplay.</p>
+  </description>
+  <launchable type="desktop-id">com.gitlab.martintornqvist.InfraArcana.desktop</launchable>
+  <url type="homepage">https://sites.google.com/site/infraarcana/home</url>
+  <url type="bugtracker">https://gitlab.com/martin-tornqvist/ia/-/issues</url>
+  <releases>
+    <release version="22.1.0" date="2023-09-24"></release>
+  </releases>
+</component>

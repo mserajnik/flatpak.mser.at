@@ -1,0 +1,3 @@
+[submodule "apps/com.github.tmewett.BrogueCE"]
+	path = apps/com.github.tmewett.BrogueCE
+	url = https://github.com/flathub/com.github.tmewett.BrogueCE.git

@@ -1,0 +1,85 @@
+# flatpak.mser.at
+# Copyright (C) 2023-present  Michael Serajnik  https://github.com/mserajnik
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+app-id: com.github.silquirk.SilQ
+runtime: org.freedesktop.Platform
+runtime-version: '23.08'
+sdk: org.freedesktop.Sdk
+command: sil-q
+
+finish-args:
+- --device=all
+# This will cause Sil-Q to put saves etc. into ~/.var/app/com.github.silquirk.SilQ/.sil/
+#
+# FIXME: Ideally, we should instruct Sil-Q to write to XDG_DATA_HOME; this has
+# to to happen when compiling the game. But setting
+# -DPRIVATE_USER_PATH=\\\\\"${XDG_DATA_HOME}\\\\\"" does not work as
+# XDG_DATA_HOME isn't set during the build.
+- --persist=.sil
+- --share=ipc
+- --socket=fallback-x11
+- --socket=wayland
+
+modules:
+  - name: ncurses
+    buildsystem: autotools
+    sources:
+      - type: archive
+        url: https://github.com/mirror/ncurses/archive/refs/tags/v6.4.tar.gz
+        sha256: 39893846139518e6c2d00ac1d354d4889f0f394acd44885d70b14eaef4e23e8e
+
+  - name: sil-q
+    buildsystem: simple
+    build-commands:
+      # Compile the game
+      # Inspired by https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=sil-q
+      - |
+        flags="-I/app/include/ncurses -O2 -fno-strength-reduce" ; \
+        flags="$flags -DUSE_X11 -DUSE_GCU -DUSE_NCURSES" ; \
+        flags="$flags -DUSE_PRIVATE_SAVE_PATH" ; \
+        flags="$flags -DDEFAULT_PATH=\\\\\"/app/lib/sil\\\\\"" ; \
+        cd src ; \
+        sed -i -e '/## Standard/,+3s/^/#/' \
+          -e "/^CC/aCFLAGS = $flags" \
+          -e "/^CC/aLIBS = -lX11 -lncurses" \
+          Makefile.std ; \
+        make -f Makefile.std install
+      # Install the executable
+      - install -Dm755 sil /app/bin/sil-q
+      # Install the desktop files, the icon and the AppData file
+      - install -Dm644 ${FLATPAK_ID}.desktop -t /app/share/applications
+      - install -Dm644 ${FLATPAK_ID}.GCU.desktop -t /app/share/applications
+      - install -Dm644 ${FLATPAK_ID}.png -t /app/share/icons/hicolor/256x256/apps
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo
+      # Copy the lib data to the custom lib path
+      - |
+        lib_path="/app/lib/sil" ; \
+        mkdir -p "$lib_path" ; \
+        cp -r lib/. "$lib_path" ; \
+        chmod -R 755 "$lib_path"
+    sources:
+      - type: git
+        url: https://github.com/sil-quirk/sil-q.git
+        tag: v1.5.0
+        commit: 09a53ab8b167660742add9ed7842b4c2301737fd
+      - type: file
+        path: com.github.silquirk.SilQ.desktop
+      - type: file
+        path: com.github.silquirk.SilQ.GCU.desktop
+      - type: file
+        path: com.github.silquirk.SilQ.png
+      - type: file
+        path: com.github.silquirk.SilQ.metainfo.xml

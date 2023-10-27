@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Infra Arcana
+GenericName=Roguelike
+Comment=A roguelike set in the early 20th century
+Icon=com.gitlab.martintornqvist.InfraArcana
+Exec=infra-arcana
+Categories=Game;
