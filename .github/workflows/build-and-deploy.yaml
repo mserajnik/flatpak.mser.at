@@ -7,9 +7,13 @@ on:
   push:
     branches:
       - 'master'
+    paths:
+      - 'apps/**'
   pull_request:
     branches:
       - 'master'
+    paths:
+      - 'apps/**'
   workflow_dispatch:
 
 jobs:
