@@ -9,11 +9,13 @@ on:
       - 'master'
     paths:
       - 'apps/**'
+      - 'README.md'
   pull_request:
     branches:
       - 'master'
     paths:
       - 'apps/**'
+      - 'README.md'
   workflow_dispatch:
 
 jobs:
