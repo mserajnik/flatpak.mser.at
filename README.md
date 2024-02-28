@@ -14,11 +14,11 @@ automatically once a week.
 
 ## Available applications
 
-| Name                                     | ID                                                           | Type | Notes                                                                                                            |
-|------------------------------------------|------------------------------------------------------------- |------| ---------------------------------------------------------------------------------------------------------------- |
-| [BrogueCE][app-brogue-ce-website]        | [`com.github.tmewett.BrogueCE`][app-brogue-ce]               | Game | This _is_ on Flathub; however, for some reason the [latest version is not getting deployed][app-brogue-ce-issue] |
-| [Infra Arcana][app-infra-arcana-website] | [`com.gitlab.martintornqvist.InfraArcana`][app-infra-arcana] | Game |                                                                                                                  |
-| [Sil-Q][app-sil-q-website]               | [`com.github.silquirk.SilQ`][app-sil-q]                      | Game | See [here][app-sil-q-using-x11] if you encounter an error when trying to launch using the X11 frontend           |
+| Name                                     | ID                                                           | Type | Notes                                                                                                                                                                                                                                                                                 |
+|------------------------------------------|------------------------------------------------------------- |------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [BrogueCE][app-brogue-ce-website]        | [`com.github.tmewett.BrogueCE`][app-brogue-ce]               | Game | This _is_ on Flathub; however, the latest version was not available there for a while due to an error in their CI/CD process and I made it available in this repository as a workaround (and will continue to keep it in the repository to not break people's existing installations) |
+| [Infra Arcana][app-infra-arcana-website] | [`com.gitlab.martintornqvist.InfraArcana`][app-infra-arcana] | Game |                                                                                                                                                                                                                                                                                       |
+| [Sil-Q][app-sil-q-website]               | [`com.github.silquirk.SilQ`][app-sil-q]                      | Game | See [here][app-sil-q-using-x11] if you encounter an error when trying to launch using the X11 frontend                                                                                                                                                                                |
 
 ## Usage
 
@@ -68,7 +68,6 @@ You are welcome to help out!
 [AGPLv3][license] © Michael Serajnik
 
 [app-brogue-ce]: https://github.com/flathub/com.github.tmewett.BrogueCE/
-[app-brogue-ce-issue]: https://github.com/flathub/com.github.tmewett.BrogueCE/issues/17
 [app-brogue-ce-website]: https://github.com/tmewett/BrogueCE
 [app-infra-arcana]: https://github.com/mserajnik/flatpak.mser.at/tree/master/apps/com.gitlab.martintornqvist.InfraArcana
 [app-infra-arcana-website]: https://sites.google.com/site/infraarcana/
