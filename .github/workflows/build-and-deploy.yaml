@@ -23,7 +23,7 @@ jobs:
     name: Build applications and repository
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/andyholmes/flatter/freedesktop:23.08
+      image: ghcr.io/andyholmes/flatter/freedesktop:24.08
       options: --privileged
 
     strategy:
