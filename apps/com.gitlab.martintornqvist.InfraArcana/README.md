@@ -3,7 +3,7 @@
 > A Roguelike set in the early 20th century
 
 - __Type:__ Game
-- __Current version:__ 22.1.0
+- __Current version:__ 23.0.0
 - __Website:__ [https://sites.google.com/site/infraarcana/](https://sites.google.com/site/infraarcana/)
 - __Repository:__ [https://gitlab.com/martin-tornqvist/ia](https://gitlab.com/martin-tornqvist/ia)
 

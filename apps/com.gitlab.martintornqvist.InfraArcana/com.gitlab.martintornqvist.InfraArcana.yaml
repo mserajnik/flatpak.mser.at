@@ -47,8 +47,8 @@ modules:
     sources:
       - type: git
         url: https://gitlab.com/martin-tornqvist/ia.git
-        tag: v22.1.0
-        commit: 017836030830ca0bf0ac692044c17a4f63ae27a7
+        tag: v23.0.0
+        commit: 51443407f4017754e59763f12f2c7ab4704e8ee2
       - type: script
         dest-filename: infra-arcana
         commands:
