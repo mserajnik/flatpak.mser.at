@@ -36,9 +36,10 @@ modules:
       - cp -r ./audio /app/lib/infra-arcana/
       - cp -r ./data /app/lib/infra-arcana/
       - cp -r ./gfx /app/lib/infra-arcana/
+      - cp ./manual.txt /app/lib/infra-arcana/
       # Install the required wrapper script (we need to change into the
-      # the executable's directory since it uses relative paths to look for
-      # the assets)
+      # executable's directory since it uses relative paths to look for the
+      # assets)
       - install -Dm755 infra-arcana -t /app/bin
       # Install the desktop file, the icon and the AppData file
       - install -Dm644 ${FLATPAK_ID}.desktop -t /app/share/applications
