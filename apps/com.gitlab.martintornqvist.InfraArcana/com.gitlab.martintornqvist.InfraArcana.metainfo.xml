@@ -3,7 +3,7 @@
   <id>com.gitlab.martintornqvist.InfraArcana</id>
   <developer_name>Martin Törnqvist</developer_name>
   <metadata_license>CC0-1.0</metadata_license>
-  <project_license>AGPL-3.0+</project_license>
+  <project_license>AGPL-3.0-or-later</project_license>
   <name>Infra Arcana</name>
   <summary>Infra Arcana is a Roguelike set in the early 20th century</summary>
   <description>

@@ -3,7 +3,7 @@
   <id>com.github.silquirk.SilQ</id>
   <developer_name>sil-quirk</developer_name>
   <metadata_license>CC0-1.0</metadata_license>
-  <project_license>GPL-2.0+</project_license>
+  <project_license>GPL-2.0-only</project_license>
   <name>Sil-Q</name>
   <summary>Sil-Q is a computer role-playing game with a strong emphasis on discovery and tactical combat</summary>
   <description>
