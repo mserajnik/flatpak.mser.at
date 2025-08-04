@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=DiabloRL
+GenericName=Roguelike
+Comment=Diablo, the Roguelike
+Icon=com.github.chaosforgeorg.DiabloRL
+Exec=rl
+Categories=Game;

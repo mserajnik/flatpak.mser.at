@@ -71,6 +71,7 @@ jobs:
         uses: andyholmes/flatter@main
         with:
           files: |
+            apps/com.github.chaosforgeorg.DiabloRL/com.github.chaosforgeorg.DiabloRL.yaml
             apps/com.github.silquirk.SilQ/com.github.silquirk.SilQ.yaml
             apps/com.github.tmewett.BrogueCE/com.github.tmewett.BrogueCE.json
             apps/com.gitlab.martintornqvist.InfraArcana/com.gitlab.martintornqvist.InfraArcana.yaml

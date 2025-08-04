@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.github.chaosforgeorg.DiabloRL</id>
+  <developer_name>ChaosForge</developer_name>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0</project_license>
+  <name>DiabloRL</name>
+  <summary>Diablo, the Roguelike</summary>
+  <description>
+    <p>DiabloRL is a small roguelike game created for the 2005 Seven Day Roguelike challenge. It is based on Diablo by Blizzard.</p>
+  </description>
+  <launchable type="desktop-id">com.github.chaosforgeorg.DiabloRL.desktop</launchable>
+  <url type="homepage">https://github.com/chaosforgeorg/diablorl</url>
+  <url type="bugtracker">https://github.com/chaosforgeorg/diablorl/issues</url>
+</component>

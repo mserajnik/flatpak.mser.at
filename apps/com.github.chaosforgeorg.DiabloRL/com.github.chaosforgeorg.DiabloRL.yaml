@@ -1,0 +1,124 @@
+# flatpak.mser.at
+# Copyright (C) 2023-present  Michael Serajnik  https://github.com/mserajnik
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+app-id: com.github.chaosforgeorg.DiabloRL
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+command: diablorl
+
+finish-args:
+- --device=all
+- --share=ipc
+- --socket=fallback-x11
+- --socket=pulseaudio
+- --socket=wayland
+
+modules:
+  - name: fpc
+    buildsystem: simple
+    only-arches:
+      - x86_64
+    build-commands:
+      - tar --no-same-owner -xf fpc-3.2.2.x86_64-linux.tar
+      - |
+        cd fpc-3.2.2.x86_64-linux ; \
+        echo -e "/app\nN\nN\nN\n" | ./install.sh
+    sources:
+      - type: file
+        url: https://downloads.sourceforge.net/project/freepascal/Linux/3.2.2/fpc-3.2.2.x86_64-linux.tar
+        sha256: 5adac308a5534b6a76446d8311fc340747cbb7edeaacfe6b651493ff3fe31e83
+
+  - name: fpc
+    buildsystem: simple
+    only-arches:
+      - aarch64
+    build-commands:
+      - tar --no-same-owner -xf fpc-3.2.2.aarch64-linux.tar
+      - |
+        cd fpc-3.2.2.aarch64-linux ; \
+        echo -e "/app\nN\nN\nN\n" | ./install.sh
+    sources:
+      - type: file
+        url: https://downloads.sourceforge.net/project/freepascal/Linux/3.2.2/fpc-3.2.2.aarch64-linux.tar
+        sha256: b39470f9b6b5b82f50fc8680a5da37d2834f2129c65c24c5628a80894d565451
+
+  - name: lua5.1
+    buildsystem: simple
+    build-commands:
+      - make linux
+      - make install INSTALL_TOP=/app
+    sources:
+      - type: archive
+        url: https://www.lua.org/ftp/lua-5.1.5.tar.gz
+        sha256: 2640fc56a795f29d28ef15e13c34a47e223960b0240e8cb0a82d9b0738695333
+
+  - name: diablorl
+    buildsystem: simple
+    build-commands:
+      # Check directory structure
+      - ls -la
+      # Set up directory structure as required by build instructions
+      - mkdir -p build-workspace
+      - cp -r diablorl-src build-workspace/diablorl
+      - cp -r fpcvalkyrie-src build-workspace/fpcvalkyrie
+      # Build using the official build process
+      - |
+        cd build-workspace/diablorl/src ; \
+        echo "Modifying Makefile.fpc to add FPC unit paths..." ; \
+        ARCH=$(uname -m) ; \
+        if [ "$ARCH" = "x86_64" ]; then FPCARCH="x86_64-linux"; elif [ "$ARCH" = "aarch64" ]; then FPCARCH="aarch64-linux"; else echo "Unsupported architecture: $ARCH"; exit 1; fi ; \
+        sed -i "s|unitdir=\$(VALKYRIEPATH) \$(LUAPATH) \$(LIBSPATH)|unitdir=\$(VALKYRIEPATH) \$(LUAPATH) \$(LIBSPATH) /app/lib/fpc/3.2.2/units/$FPCARCH/*|" Makefile.fpc ; \
+        FPCDIR=/app/lib/fpc/3.2.2/ fpcmake ; \
+        make ; \
+        cd ../bin ; \
+        ./mpq ; \
+        ls -lah
+      # Install the executable and game data
+      # - install -Dm755 rl /app/lib/diablorl/diablorl
+      # - install -Dm755 mpq /app/lib/diablorl/mpq
+      # - cp -r ../graphics /app/lib/diablorl/
+      # - cp -r ../sound /app/lib/diablorl/
+      # - cp -r ../config /app/lib/diablorl/
+      # - cp -r ../modules /app/lib/diablorl/
+      # - cp data.mpq /app/lib/diablorl/
+      # Install the wrapper script
+      - exit 1 # Stop here for debugging
+      - install -Dm755 diablorl /app/bin/diablorl
+      # Install the desktop file, icon and metainfo
+      - install -Dm644 ${FLATPAK_ID}.desktop -t /app/share/applications
+      - install -Dm644 ${FLATPAK_ID}.png -t /app/share/icons/hicolor/256x256/apps
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo
+    sources:
+      - type: git
+        url: https://github.com/chaosforgeorg/diablorl.git
+        branch: development
+        dest: diablorl-src
+      - type: git
+        url: https://github.com/chaosforgeorg/fpcvalkyrie.git
+        branch: development
+        dest: fpcvalkyrie-src
+      - type: script
+        dest-filename: diablorl
+        commands:
+          - cd /app/lib/diablorl
+          - exec ./diablorl "$@"
+      - type: file
+        path: com.github.chaosforgeorg.DiabloRL.desktop
+      - type: file
+        path: com.github.chaosforgeorg.DiabloRL.png
+      - type: file
+        path: com.github.chaosforgeorg.DiabloRL.metainfo.xml
