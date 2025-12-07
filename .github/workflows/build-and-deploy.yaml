@@ -72,10 +72,10 @@ jobs:
         with:
           files: |
             apps/com.github.silquirk.SilQ/com.github.silquirk.SilQ.yaml
-            apps/com.github.tmewett.BrogueCE/com.github.tmewett.BrogueCE.json
             apps/com.gitlab.martintornqvist.InfraArcana/com.gitlab.martintornqvist.InfraArcana.yaml
           arch: ${{ matrix.arch }}
           gpg-sign: ${{ steps.gpg.outputs.fingerprint }}
+          cache-key: flatpak-mser-at-cache-2025-12-07
           upload-bundles: true
           upload-pages-artifact: ${{ matrix.arch == 'aarch64' }}
           upload-pages-includes: |
