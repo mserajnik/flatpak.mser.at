@@ -3,7 +3,7 @@
 
 app-id: com.gitlab.martintornqvist.InfraArcana
 runtime: org.freedesktop.Platform
-runtime-version: '24.08'
+runtime-version: '25.08'
 sdk: org.freedesktop.Sdk
 command: infra-arcana
 
@@ -15,8 +15,28 @@ finish-args:
 - --socket=wayland
 
 modules:
+  # Infra Arcana needs the SDL2 `SDL2_image` library, which the Freedesktop
+  # runtime no longer ships as of 25.08 (it provides the SDL3 version instead),
+  # so we build it from source against the SDK's `sdl2-compat`.
+  - name: sdl2-image
+    buildsystem: cmake-ninja
+    # SDL_image refuses to configure in-tree, so build it in a subdirectory.
+    builddir: true
+    config-opts:
+      - -DSDL2IMAGE_SAMPLES=OFF
+      - -DSDL2IMAGE_TESTS=OFF
+      - -DSDL2IMAGE_VENDORED=OFF
+    sources:
+      - type: archive
+        url: https://github.com/libsdl-org/SDL_image/releases/download/release-2.8.12/SDL2_image-2.8.12.tar.gz
+        sha256: 393f5efb50536ec13ca4f4affb69cc9966d3c3f969e6c5e701faddf9f9785381
+
   - name: infra-arcana
     buildsystem: cmake
+    # Infra Arcana's CMakeLists predates the minimum CMake version the 25.08
+    # SDK accepts; allow it to configure anyway.
+    config-opts:
+      - -DCMAKE_POLICY_VERSION_MINIMUM=3.5
     build-commands:
       # Install the game executable and assets.
       - install -Dm755 ./ia -t /app/lib/infra-arcana

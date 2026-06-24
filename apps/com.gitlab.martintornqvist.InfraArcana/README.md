@@ -3,9 +3,11 @@
 > A Roguelike set in the early 20th century
 
 - __Type:__ Game
-- __Current version:__ 23.0.0
-- __Website:__ [https://sites.google.com/site/infraarcana/](https://sites.google.com/site/infraarcana/)
-- __Repository:__ [https://gitlab.com/martin-tornqvist/ia](https://gitlab.com/martin-tornqvist/ia)
+- __Current version:__ `v23.0.0`
+- __Website:__
+  [https://sites.google.com/site/infraarcana/](https://sites.google.com/site/infraarcana/)
+- __Repository:__
+  [https://gitlab.com/martin-tornqvist/ia](https://gitlab.com/martin-tornqvist/ia)
 
 ## Installation
 
@@ -19,3 +21,9 @@ flatpak install flatpak.mser.at com.gitlab.martintornqvist.InfraArcana
 
 Savegames will be stored in
 `~/.var/app/com.gitlab.martintornqvist.InfraArcana/data/infra_arcana`.
+
+### Icon
+
+The application icon is Infra Arcana's own emblem, contributed to the game by
+Agata Skrzypczyk. Like the rest of Infra Arcana, it is licensed under
+`AGPL-3.0-or-later`.
