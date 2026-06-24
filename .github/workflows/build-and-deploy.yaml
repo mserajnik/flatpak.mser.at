@@ -11,12 +11,14 @@ on:
     branches:
       - 'master'
     paths:
+      - '.github/workflows/build-and-deploy.yaml'
       - 'apps/**'
       - 'README.md'
   pull_request:
     branches:
       - 'master'
     paths:
+      - '.github/workflows/build-and-deploy.yaml'
       - 'apps/**'
       - 'README.md'
   workflow_dispatch:
@@ -24,7 +26,7 @@ on:
 jobs:
   build:
     name: Build applications and repository
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.arch == 'aarch64' && 'ubuntu-24.04-arm' || 'ubuntu-latest' }}
     container:
       image: ghcr.io/andyholmes/flatter/freedesktop:24.08
       options: --privileged
@@ -32,15 +34,13 @@ jobs:
     strategy:
       matrix:
         arch: [x86_64, aarch64]
-      fail-fast: false
+      fail-fast: true
       # Only one job at a time can use the shared repository cache.
       max-parallel: 1
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
-        with:
-          submodules: recursive
 
       - name: Set up GPG
         id: gpg
@@ -48,13 +48,6 @@ jobs:
         with:
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.GPG_PASSPHRASE }}
-
-      - name: Set up QEMU
-        if: ${{ matrix.arch == 'aarch64' }}
-        id: qemu
-        uses: docker/setup-qemu-action@v4
-        with:
-          platforms: arm64
 
       - name: Generate index.html file
         uses: jaywcjlove/markdown-to-html-cli@main
@@ -71,7 +64,7 @@ jobs:
           echo "flatpak.mser.at" > CNAME
 
       - name: Build applications
-        uses: andyholmes/flatter@main
+        uses: andyholmes/flatter@v1
         with:
           files: |
             apps/com.github.silquirk.SilQ/com.github.silquirk.SilQ.yaml
@@ -100,4 +93,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
