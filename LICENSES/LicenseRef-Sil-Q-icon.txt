@@ -1,0 +1,11 @@
+The Sil-Q application icon in this repository is a cropped detail of a painting
+by John Howe depicting the duel between Fingolfin and Morgoth. The same
+painting appears on the cover of Sil-Q's own game manual, and the icon is
+reused here, in that same spirit, solely to identify the packaged game.
+
+The painting is the copyrighted work of John Howe. It is not covered by any of
+the free licenses used elsewhere in this repository, and no license to the
+artwork is claimed or granted.
+
+If the copyright holder does not wish this artwork to be published here, it
+will be removed on request.

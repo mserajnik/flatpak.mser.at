@@ -1,4 +1,7 @@
-# flatpak.mser.at [![GitHub Actions status][actions-status-badge]][actions-status]
+# flatpak.mser.at
+
+[![Lint status][badge-lint-status]][badge-lint-status-url]
+[![Build status][badge-build-status]][badge-build-status-url]
 
 > Various things missing from Flathub
 
@@ -14,10 +17,10 @@ automatically once a week.
 
 ## Available applications
 
-| Name                                     | ID                                                           | Type | Notes                                                                                                                                                                                                                                                                                 |
-|------------------------------------------|------------------------------------------------------------- |------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Infra Arcana][app-infra-arcana-website] | [`com.gitlab.martintornqvist.InfraArcana`][app-infra-arcana] | Game |                                                                                                                                                                                                                                                                                       |
-| [Sil-Q][app-sil-q-website]               | [`com.github.silquirk.SilQ`][app-sil-q]                      | Game | See [here][app-sil-q-using-x11] if you encounter an error when trying to launch using the X11 frontend                                                                                                                                                                                |
+| Name                                     | ID                                                           | Type | Notes                                                                                                  |
+| ---------------------------------------- | ------------------------------------------------------------ | ---- | ------------------------------------------------------------------------------------------------------ |
+| [Infra Arcana][app-infra-arcana-website] | [`com.gitlab.martintornqvist.InfraArcana`][app-infra-arcana] | Game |                                                                                                        |
+| [Sil-Q][app-sil-q-website]               | [`com.github.silquirk.SilQ`][app-sil-q]                      | Game | See [here][app-sil-q-using-x11] if you encounter an error when trying to launch using the X11 frontend |
 
 ## Usage
 
@@ -62,22 +65,33 @@ You are welcome to help out!
 
 [Open an issue][issues] or [make a pull request][pull-requests].
 
-## License
+## Licenses
 
-[AGPLv3][license] © Michael Serajnik
+- [`AGPL-3.0-or-later`][license-agpl-3.0-or-later] (Code and the Infra Arcana
+  icon)
+- [`CC-BY-SA-4.0`][license-cc-by-sa-4.0] (Documentation)
+- [`CC0-1.0`][license-cc0-1.0] (Configuration and packaging metadata)
+- [`LicenseRef-Sil-Q-icon`][license-sil-q-icon] (Sil-Q icon)
+
+This project follows the [REUSE specification][reuse-spec].
 
 [app-infra-arcana]: https://github.com/mserajnik/flatpak.mser.at/tree/master/apps/com.gitlab.martintornqvist.InfraArcana
 [app-infra-arcana-website]: https://sites.google.com/site/infraarcana/
 [app-sil-q]: https://github.com/mserajnik/flatpak.mser.at/tree/master/apps/com.github.silquirk.SilQ
-[app-sil-q-website]: https://github.com/sil-quirk/sil-q
 [app-sil-q-using-x11]: https://github.com/mserajnik/flatpak.mser.at/tree/master/apps/com.github.silquirk.SilQ#using-the-x11-frontend
+[app-sil-q-website]: https://github.com/sil-quirk/sil-q
+[badge-build-status]: https://github.com/mserajnik/flatpak.mser.at/actions/workflows/build-and-deploy.yaml/badge.svg
+[badge-build-status-url]: https://github.com/mserajnik/flatpak.mser.at/actions/workflows/build-and-deploy.yaml
+[badge-lint-status]: https://github.com/mserajnik/flatpak.mser.at/actions/workflows/lint.yaml/badge.svg
+[badge-lint-status-url]: https://github.com/mserajnik/flatpak.mser.at/actions/workflows/lint.yaml
 [flathub]: https://flathub.org/
 [flatpak]: https://flatpak.org/
-[steam-deck]: https://www.steamdeck.com/
-
-[actions-status]: https://github.com/mserajnik/flatpak.mser.at/actions
-[actions-status-badge]: https://github.com/mserajnik/flatpak.mser.at/actions/workflows/build-and-deploy.yaml/badge.svg
 [issues]: https://github.com/mserajnik/flatpak.mser.at/issues
-[license]: https://github.com/mserajnik/flatpak.mser.at/blob/master/LICENSE
+[license-agpl-3.0-or-later]: LICENSES/AGPL-3.0-or-later.txt
+[license-cc-by-sa-4.0]: LICENSES/CC-BY-SA-4.0.txt
+[license-cc0-1.0]: LICENSES/CC0-1.0.txt
+[license-sil-q-icon]: LICENSES/LicenseRef-Sil-Q-icon.txt
 [maintainer]: https://github.com/mserajnik
 [pull-requests]: https://github.com/mserajnik/flatpak.mser.at/pulls
+[reuse-spec]: https://reuse.software/spec/
+[steam-deck]: https://www.steamdeck.com/
