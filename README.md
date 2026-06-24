@@ -55,6 +55,23 @@ To install an application, use the `flatpak install` command:
 flatpak install flatpak.mser.at com.gitlab.martintornqvist.InfraArcana
 ```
 
+## Breaking changes
+
+Sometimes a change requires manual intervention on existing installations.
+These are listed here, newest first (and removed once they are no longer
+relevant):
+
+- __[2026-06-24] - The repository is signed with a new GPG key:__ if you added
+  the repository before this date, `flatpak` refuses to update the installed
+  applications because the new signature no longer matches the pinned key.
+  Remove and re-add the repository to pin the new key (installed applications
+  and their data are kept):
+
+  ```sh
+  flatpak remote-delete --force flatpak.mser.at
+  flatpak remote-add --if-not-exists flatpak.mser.at https://flatpak.mser.at/index.flatpakrepo
+  ```
+
 ## Maintainer
 
 [Michael Serajnik][maintainer]
