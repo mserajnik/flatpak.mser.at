@@ -9,49 +9,53 @@ command: sil-q
 
 finish-args:
 - --device=all
-# This will cause Sil-Q to put saves etc. into ~/.var/app/com.github.silquirk.SilQ/.sil/
-#
-# FIXME: Ideally, we should instruct Sil-Q to write to XDG_DATA_HOME; this has
-# to to happen when compiling the game. But setting
-# -DPRIVATE_USER_PATH=\\\\\"${XDG_DATA_HOME}\\\\\"" does not work as
-# XDG_DATA_HOME isn't set during the build.
+# Sil-Q stores its savefiles, scores and data cache in `~/.sil` (see the build
+# step below); `--persist` keeps that directory in the application's data
+# directory (`~/.var/app/com.github.silquirk.SilQ/.sil`).
 - --persist=.sil
 - --share=ipc
-- --socket=fallback-x11
-- --socket=wayland
+# Sil-Q only has X11 and terminal (GCU) frontends, not a Wayland one, so it
+# needs a plain X11 socket; `fallback-x11` would withhold X11 in a Wayland
+# session.
+- --socket=x11
 
 modules:
-  - name: ncurses
-    buildsystem: autotools
-    sources:
-      - type: archive
-        url: https://github.com/mirror/ncurses/archive/refs/tags/v6.4.tar.gz
-        sha256: 39893846139518e6c2d00ac1d354d4889f0f394acd44885d70b14eaef4e23e8e
-
   - name: sil-q
     buildsystem: simple
     build-commands:
-      # Compile the game
-      # Inspired by https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=sil-q
+      # Sil-Q builds with CMake. On Linux the build no longer defines
+      # `USE_PRIVATE_SAVE_PATH` or `DEFAULT_PATH`, so by default the game reads
+      # and writes everything relative to `./lib`. That does not work under
+      # Flatpak, where `/app` is read-only. We set both in the source before
+      # building: `USE_PRIVATE_SAVE_PATH` redirects the writable directories
+      # (`save`, `scores`, `data`) into `~/.sil/Sil-Q` (created automatically
+      # on first launch), and `DEFAULT_PATH` points the game at its read-only
+      # data in `/app/lib/sil`.
       - |
-        flags="-I/app/include/ncurses -O2 -fno-strength-reduce" ; \
-        flags="$flags -DUSE_X11 -DUSE_GCU -DUSE_NCURSES" ; \
-        flags="$flags -DUSE_PRIVATE_SAVE_PATH" ; \
-        flags="$flags -DDEFAULT_PATH=\\\\\"/app/lib/sil\\\\\"" ; \
-        cd src ; \
-        sed -i -e '/## Standard/,+3s/^/#/' \
-          -e "/^CC/aCFLAGS = $flags" \
-          -e "/^CC/aLIBS = -lX11 -lncurses" \
-          Makefile.std ; \
-        make -f Makefile.std install
-      # Install the executable
-      - install -Dm755 sil /app/bin/sil-q
-      # Install the desktop files, the icon and the AppData file
+        sed -i \
+          -e '1i #define USE_PRIVATE_SAVE_PATH' \
+          -e 's|#define DEFAULT_PATH "./lib/"|#define DEFAULT_PATH "/app/lib/sil"|' \
+          src/config.h
+      # Build with the X11 and GCU frontends. The Cocoa frontend is macOS-only
+      # and defaults to on, so it has to be disabled explicitly. The runtime's
+      # ncurses keeps the terminfo symbols in a separate `libtinfo`, so we make
+      # the linker pull them in via the GCU frontend's `libncurses` dependency.
+      - |
+        cmake -G Ninja -B build \
+          -DCMAKE_BUILD_TYPE=Release \
+          -DSUPPORT_COCOA_FRONTEND=OFF \
+          -DSUPPORT_X11_FRONTEND=ON \
+          -DSUPPORT_GCU_FRONTEND=ON \
+          -DCMAKE_EXE_LINKER_FLAGS=-Wl,--copy-dt-needed-entries
+      - cmake --build build
+      # Install the executable.
+      - install -Dm755 build/sil /app/bin/sil-q
+      # Install the desktop files, the icon and the AppData file.
       - install -Dm644 ${FLATPAK_ID}.desktop -t /app/share/applications
       - install -Dm644 ${FLATPAK_ID}.GCU.desktop -t /app/share/applications
       - install -Dm644 ${FLATPAK_ID}.png -t /app/share/icons/hicolor/256x256/apps
       - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo
-      # Copy the lib data to the custom lib path
+      # Copy the read-only game data to the location `DEFAULT_PATH` points at.
       - |
         lib_path="/app/lib/sil" ; \
         mkdir -p "$lib_path" ; \
@@ -60,8 +64,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/sil-quirk/sil-q.git
-        tag: v1.5.0
-        commit: 09a53ab8b167660742add9ed7842b4c2301737fd
+        tag: v1.5.1-beta1
+        commit: 4e417a7322a9cf037ee672c11f330eda7fd2c1b9
       - type: file
         path: com.github.silquirk.SilQ.desktop
       - type: file

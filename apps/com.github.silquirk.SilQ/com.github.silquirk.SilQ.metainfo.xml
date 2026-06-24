@@ -14,6 +14,7 @@
   <url type="homepage">https://github.com/sil-quirk/sil-q</url>
   <url type="bugtracker">https://github.com/sil-quirk/sil-q/issues</url>
   <releases>
+    <release version="1.5.1-beta1" date="2026-05-16" type="development"></release>
     <release version="1.5.0" date="2022-01-03"></release>
   </releases>
 </component>
