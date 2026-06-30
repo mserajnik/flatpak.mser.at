@@ -12,15 +12,15 @@ on:
       - 'master'
     paths:
       - '.github/workflows/build-and-deploy.yaml'
-      - 'apps/**'
       - 'README.md'
+      - 'apps/**'
   pull_request:
     branches:
       - 'master'
     paths:
       - '.github/workflows/build-and-deploy.yaml'
-      - 'apps/**'
       - 'README.md'
+      - 'apps/**'
   workflow_dispatch:
 
 jobs:
@@ -75,8 +75,8 @@ jobs:
           upload-bundles: true
           upload-pages-artifact: ${{ matrix.arch == 'aarch64' }}
           upload-pages-includes: |
-            index.html
             CNAME
+            index.html
 
   deploy:
     name: Deploy repository
