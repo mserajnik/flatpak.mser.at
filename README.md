@@ -61,7 +61,7 @@ Sometimes a change requires manual intervention on existing installations.
 These are listed here, newest first (and removed once they are no longer
 relevant):
 
-- __[2026-06-24] - The repository is signed with a new GPG key:__ if you added
+- __[2026-06-24] - The repository is signed with a new GPG key__: if you added
   the repository before this date, `flatpak` refuses to update the installed
   applications because the new signature no longer matches the pinned key.
   Remove and re-add the repository to pin the new key (installed applications

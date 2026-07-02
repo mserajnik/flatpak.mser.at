@@ -3,9 +3,9 @@
 > A computer role-playing game with a strong emphasis on discovery and tactical
 > combat
 
-- __Type:__ Game
-- __Current version:__ `v1.5.1-beta1`
-- __Repository:__
+- __Type__: Game
+- __Current version__: `v1.5.1-beta1`
+- __Repository__:
   [https://github.com/sil-quirk/sil-q](https://github.com/sil-quirk/sil-q)
 
 ## Installation
