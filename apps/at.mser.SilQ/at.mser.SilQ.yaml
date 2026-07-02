@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2023-2026 Michael Serajnik <https://github.com/mserajnik>
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-app-id: com.github.silquirk.SilQ
+app-id: at.mser.SilQ
 runtime: org.freedesktop.Platform
 runtime-version: '25.08'
 sdk: org.freedesktop.Sdk
@@ -11,7 +11,7 @@ finish-args:
 - --device=all
 # Sil-Q stores its savefiles, scores and data cache in `~/.sil` (see the build
 # step below); `--persist` keeps that directory in the application's data
-# directory (`~/.var/app/com.github.silquirk.SilQ/.sil`).
+# directory (`~/.var/app/at.mser.SilQ/.sil`).
 - --persist=.sil
 - --share=ipc
 # Sil-Q only has X11 and terminal (GCU) frontends, not a Wayland one, so it
@@ -67,10 +67,10 @@ modules:
         tag: v1.5.1-beta1
         commit: 4e417a7322a9cf037ee672c11f330eda7fd2c1b9
       - type: file
-        path: com.github.silquirk.SilQ.desktop
+        path: at.mser.SilQ.desktop
       - type: file
-        path: com.github.silquirk.SilQ.GCU.desktop
+        path: at.mser.SilQ.GCU.desktop
       - type: file
-        path: com.github.silquirk.SilQ.png
+        path: at.mser.SilQ.png
       - type: file
-        path: com.github.silquirk.SilQ.metainfo.xml
+        path: at.mser.SilQ.metainfo.xml

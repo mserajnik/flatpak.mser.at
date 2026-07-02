@@ -11,7 +11,7 @@
 ## Installation
 
 ```sh
-flatpak install flatpak.mser.at com.github.silquirk.SilQ
+flatpak install flatpak.mser.at at.mser.SilQ
 ```
 
 ## Additional information
@@ -28,7 +28,7 @@ Fedora you can install [`xorg-x11-fonts-misc`][xorg-fonts-misc-package-fedora].
 If Sil-Q can't load the font it will exit with an error when trying to launch:
 
 ```console
-$ flatpak run com.github.silquirk.SilQ
+$ flatpak run at.mser.SilQ
 sil-q: Couldn't load the requested font. (10x20)
 ```
 
@@ -46,14 +46,14 @@ After installing the font and figuring out its XLFD font name, you can use the
 thus let Sil-Q know which font you want it to use:
 
 ```sh
-flatpak override --env=SIL_X11_FONT="-misc-liberation mono-medium-r-normal--20-0-0-0-m-0-iso8859-1" com.github.silquirk.SilQ
+flatpak override --env=SIL_X11_FONT="-misc-liberation mono-medium-r-normal--20-0-0-0-m-0-iso8859-1" at.mser.SilQ
 ```
 
 If you want to set a different font per user, add the `--user` flag to the
 `flatpak override` command:
 
 ```sh
-flatpak override --user --env=SIL_X11_FONT="-misc-liberation mono-medium-r-normal--20-0-0-0-m-0-iso8859-1" com.github.silquirk.SilQ
+flatpak override --user --env=SIL_X11_FONT="-misc-liberation mono-medium-r-normal--20-0-0-0-m-0-iso8859-1" at.mser.SilQ
 ```
 
 `SIL_X11_FONT` sets the font for all of Sil-Q's windows at once. Sil-Q also
@@ -77,13 +77,12 @@ you should also be able to use the [Hack font][hack-font] out of the box, since
 Plasma uses it as its default monospace font:
 
 ```sh
-flatpak override --env=SIL_X11_FONT="-misc-hack-medium-r-normal--0-0-0-0-m-0-iso8859-1" com.github.silquirk.SilQ
+flatpak override --env=SIL_X11_FONT="-misc-hack-medium-r-normal--0-0-0-0-m-0-iso8859-1" at.mser.SilQ
 ```
 
 ### Savegames
 
-Savegames will be stored in
-`~/.var/app/com.github.silquirk.SilQ/.sil/Sil-Q/save`.
+Savegames will be stored in `~/.var/app/at.mser.SilQ/.sil/Sil-Q/save`.
 
 ### Icon
 

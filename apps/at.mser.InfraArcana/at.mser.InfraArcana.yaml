@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2023-2026 Michael Serajnik <https://github.com/mserajnik>
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-app-id: com.gitlab.martintornqvist.InfraArcana
+app-id: at.mser.InfraArcana
 runtime: org.freedesktop.Platform
 runtime-version: '25.08'
 sdk: org.freedesktop.Sdk
@@ -63,8 +63,8 @@ modules:
           - cd /app/lib/infra-arcana
           - exec ./ia "$@"
       - type: file
-        path: com.gitlab.martintornqvist.InfraArcana.desktop
+        path: at.mser.InfraArcana.desktop
       - type: file
-        path: com.gitlab.martintornqvist.InfraArcana.png
+        path: at.mser.InfraArcana.png
       - type: file
-        path: com.gitlab.martintornqvist.InfraArcana.metainfo.xml
+        path: at.mser.InfraArcana.metainfo.xml

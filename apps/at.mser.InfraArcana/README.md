@@ -12,15 +12,14 @@
 ## Installation
 
 ```sh
-flatpak install flatpak.mser.at com.gitlab.martintornqvist.InfraArcana
+flatpak install flatpak.mser.at at.mser.InfraArcana
 ```
 
 ## Additional information
 
 ### Savegames
 
-Savegames will be stored in
-`~/.var/app/com.gitlab.martintornqvist.InfraArcana/data/infra_arcana`.
+Savegames will be stored in `~/.var/app/at.mser.InfraArcana/data/infra_arcana`.
 
 ### Icon
 

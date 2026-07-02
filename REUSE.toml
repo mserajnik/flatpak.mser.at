@@ -3,8 +3,8 @@ version = 1
 [[annotations]]
 path = [
   "README.md",
-  "apps/com.github.silquirk.SilQ/README.md",
-  "apps/com.gitlab.martintornqvist.InfraArcana/README.md",
+  "apps/at.mser.InfraArcana/README.md",
+  "apps/at.mser.SilQ/README.md",
 ]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2023-2026 Michael Serajnik <https://github.com/mserajnik>"
@@ -14,24 +14,24 @@ SPDX-License-Identifier = "CC-BY-SA-4.0"
 path = [
   ".dprint.jsonc",
   ".editorconfig",
-  "apps/com.github.silquirk.SilQ/com.github.silquirk.SilQ.GCU.desktop",
-  "apps/com.github.silquirk.SilQ/com.github.silquirk.SilQ.desktop",
-  "apps/com.github.silquirk.SilQ/com.github.silquirk.SilQ.metainfo.xml",
-  "apps/com.gitlab.martintornqvist.InfraArcana/com.gitlab.martintornqvist.InfraArcana.desktop",
-  "apps/com.gitlab.martintornqvist.InfraArcana/com.gitlab.martintornqvist.InfraArcana.metainfo.xml",
+  "apps/at.mser.InfraArcana/at.mser.InfraArcana.desktop",
+  "apps/at.mser.InfraArcana/at.mser.InfraArcana.metainfo.xml",
+  "apps/at.mser.SilQ/at.mser.SilQ.GCU.desktop",
+  "apps/at.mser.SilQ/at.mser.SilQ.desktop",
+  "apps/at.mser.SilQ/at.mser.SilQ.metainfo.xml",
 ]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2023-2026 Michael Serajnik <https://github.com/mserajnik>"
 SPDX-License-Identifier = "CC0-1.0"
 
 [[annotations]]
-path = "apps/com.gitlab.martintornqvist.InfraArcana/com.gitlab.martintornqvist.InfraArcana.png"
+path = "apps/at.mser.InfraArcana/at.mser.InfraArcana.png"
 precedence = "aggregate"
 SPDX-FileCopyrightText = "Agata Skrzypczyk"
 SPDX-License-Identifier = "AGPL-3.0-or-later"
 
 [[annotations]]
-path = "apps/com.github.silquirk.SilQ/com.github.silquirk.SilQ.png"
+path = "apps/at.mser.SilQ/at.mser.SilQ.png"
 precedence = "aggregate"
 SPDX-FileCopyrightText = "John Howe"
 SPDX-License-Identifier = "LicenseRef-Sil-Q-icon"

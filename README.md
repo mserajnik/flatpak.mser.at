@@ -17,10 +17,10 @@ automatically once a week.
 
 ## Available applications
 
-| Name                                     | ID                                                           | Type | Notes                                                                                                  |
-| ---------------------------------------- | ------------------------------------------------------------ | ---- | ------------------------------------------------------------------------------------------------------ |
-| [Infra Arcana][app-infra-arcana-website] | [`com.gitlab.martintornqvist.InfraArcana`][app-infra-arcana] | Game |                                                                                                        |
-| [Sil-Q][app-sil-q-website]               | [`com.github.silquirk.SilQ`][app-sil-q]                      | Game | See [here][app-sil-q-using-x11] if you encounter an error when trying to launch using the X11 frontend |
+| Name                                     | ID                                        | Type | Notes                                                                                                  |
+| ---------------------------------------- | ----------------------------------------- | ---- | ------------------------------------------------------------------------------------------------------ |
+| [Infra Arcana][app-infra-arcana-website] | [`at.mser.InfraArcana`][app-infra-arcana] | Game |                                                                                                        |
+| [Sil-Q][app-sil-q-website]               | [`at.mser.SilQ`][app-sil-q]               | Game | See [here][app-sil-q-using-x11] if you encounter an error when trying to launch using the X11 frontend |
 
 ## Usage
 
@@ -52,7 +52,7 @@ flatpak remote-ls flatpak.mser.at
 To install an application, use the `flatpak install` command:
 
 ```sh
-flatpak install flatpak.mser.at com.gitlab.martintornqvist.InfraArcana
+flatpak install flatpak.mser.at at.mser.InfraArcana
 ```
 
 ## Breaking changes
@@ -60,6 +60,23 @@ flatpak install flatpak.mser.at com.gitlab.martintornqvist.InfraArcana
 Sometimes a change requires manual intervention on existing installations.
 These are listed here, newest first (and removed once they are no longer
 relevant):
+
+- __[2026-07-02] - The applications have been renamed__: all applications now
+  use IDs under the `at.mser.*` namespace to make clear that these are
+  unofficial repackagings and to avoid colliding with IDs the upstream projects
+  would legitimately use if they ever published official Flatpaks:
+  `com.github.silquirk.SilQ` is now `at.mser.SilQ` and
+  `com.gitlab.martintornqvist.InfraArcana` is now `at.mser.InfraArcana`. To
+  Flatpak, a renamed application is a different application, so existing
+  installations no longer receive updates. Uninstall the old application,
+  optionally move its data (e.g., savegames) to the new location and install
+  the new application; e.g., for Sil-Q:
+
+  ```sh
+  flatpak uninstall com.github.silquirk.SilQ
+  mv ~/.var/app/com.github.silquirk.SilQ ~/.var/app/at.mser.SilQ
+  flatpak install flatpak.mser.at at.mser.SilQ
+  ```
 
 - __[2026-06-24] - The repository is signed with a new GPG key__: if you added
   the repository before this date, `flatpak` refuses to update the installed
@@ -92,10 +109,10 @@ You are welcome to help out!
 
 This project follows the [REUSE specification][reuse-spec].
 
-[app-infra-arcana]: https://github.com/mserajnik/flatpak.mser.at/tree/master/apps/com.gitlab.martintornqvist.InfraArcana
+[app-infra-arcana]: https://github.com/mserajnik/flatpak.mser.at/tree/master/apps/at.mser.InfraArcana
 [app-infra-arcana-website]: https://sites.google.com/site/infraarcana/
-[app-sil-q]: https://github.com/mserajnik/flatpak.mser.at/tree/master/apps/com.github.silquirk.SilQ
-[app-sil-q-using-x11]: https://github.com/mserajnik/flatpak.mser.at/tree/master/apps/com.github.silquirk.SilQ#using-the-x11-frontend
+[app-sil-q]: https://github.com/mserajnik/flatpak.mser.at/tree/master/apps/at.mser.SilQ
+[app-sil-q-using-x11]: https://github.com/mserajnik/flatpak.mser.at/tree/master/apps/at.mser.SilQ#using-the-x11-frontend
 [app-sil-q-website]: https://github.com/sil-quirk/sil-q
 [badge-build-status]: https://github.com/mserajnik/flatpak.mser.at/actions/workflows/build-and-deploy.yaml/badge.svg
 [badge-build-status-url]: https://github.com/mserajnik/flatpak.mser.at/actions/workflows/build-and-deploy.yaml

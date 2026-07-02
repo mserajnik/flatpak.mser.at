@@ -67,11 +67,11 @@ jobs:
         uses: andyholmes/flatter@v1
         with:
           files: |
-            apps/com.github.silquirk.SilQ/com.github.silquirk.SilQ.yaml
-            apps/com.gitlab.martintornqvist.InfraArcana/com.gitlab.martintornqvist.InfraArcana.yaml
+            apps/at.mser.InfraArcana/at.mser.InfraArcana.yaml
+            apps/at.mser.SilQ/at.mser.SilQ.yaml
           arch: ${{ matrix.arch }}
           gpg-sign: ${{ steps.gpg.outputs.fingerprint }}
-          cache-key: flatpak-mser-at-cache-2026-06-24
+          cache-key: flatpak-mser-at-cache-2026-07-02
           upload-bundles: true
           upload-pages-artifact: ${{ matrix.arch == 'aarch64' }}
           upload-pages-includes: |
