@@ -69,8 +69,8 @@ monster recall):
 - `SIL_X11_AT_X_<n>` / `SIL_X11_AT_Y_<n>`: the position of window `<n>` in
   pixels
 
-These are set the same way as `SIL_X11_FONT` above, via
-`flatpak override --env=...`.
+These are set the same way as `SIL_X11_FONT` above, via `flatpak override
+--env=...`.
 
 If you are using KDE Plasma (e.g., when using Desktop Mode on the Steam Deck),
 you should also be able to use the [Hack font][hack-font] out of the box, since
