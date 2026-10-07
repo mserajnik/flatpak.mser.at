@@ -3,14 +3,12 @@
 [![Lint status][badge-lint-status]][badge-lint-status-url]
 [![Build status][badge-build-status]][badge-build-status-url]
 
-> Various things missing from Flathub
-
-This deploys a [Flatpak][flatpak] repository that contains various things that
-are currently not available on [Flathub][flathub]. The main use case right now
-is for installing a couple of roguelike games on the [Steam Deck][steam-deck]
-(as Flatpak is what it supports out-of-the-box and what will survive system
-updates without manual intervention), hence why there aren't any other packages
-available (for now).
+This project deploys a [Flatpak][flatpak] repository that contains various
+things that are currently not available on [Flathub][flathub]. The main use
+case right now is for installing a couple of roguelike games on the
+[Steam Deck][steam-deck] (as Flatpak is what it supports out-of-the-box and
+what will survive system updates without manual intervention), hence why there
+aren't any other packages available (for now).
 
 Both `x86_64` and `aarch64` variants are available and all packages are rebuilt
 automatically once a week.
